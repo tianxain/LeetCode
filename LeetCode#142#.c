@@ -7,7 +7,8 @@
  */
 typedef struct ListNode  ListNode;
 struct ListNode *detectCycle(struct ListNode *head) {
-  ListNode* slow=head;
+    //第一种
+    ListNode* slow=head;
     ListNode* fast=head;
 
     while(fast&&fast->next)
@@ -16,8 +17,18 @@ struct ListNode *detectCycle(struct ListNode *head) {
         slow=slow->next;
         if(fast==slow)
         {
-            return true;
+            //求环的入口
+            ListNode* meet=slow;
+            ListNode* start=head;
+            while(meet!=start)
+            {
+                meet=meet->next;
+                start=start->next;
+            }
+            return meet;
         }
     }
     return NULL;   
+
+    //第二种：转换成链表相交问题
 }
